@@ -8,7 +8,6 @@ st.set_page_config(layout='wide', page_title= 'E Commerce Dashboard', initial_si
 
 # Sidebar configuration
 st.sidebar.header('E-Commerce Dashboard')
-st.sidebar.subheader('Filter Data')
 
 # Load the dataset
 data = pd.read_csv('data.csv', encoding='latin1')
@@ -18,16 +17,11 @@ data['TotalPrice'] = data['Quantity'] * data['UnitPrice']
 st.title(' :clipboard: E Commerce Dashboard')
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>',unsafe_allow_html=True)
 
-st.sidebar.markdown('### KPIs')
+
 total_sales_revenue = data['TotalPrice'].sum()
 average_order_value = total_sales_revenue / data['InvoiceNo'].nunique()
 total_orders = data['InvoiceNo'].nunique()
 total_customers = data['CustomerID'].nunique()
-
-st.sidebar.metric(label="Total Sales Revenue ($)", value=f"{total_sales_revenue:,.2f}")
-st.sidebar.metric(label="Average Order Value ($)", value=f"{average_order_value:,.2f}")
-st.sidebar.metric(label="Total Number of Orders", value=total_orders)
-st.sidebar.metric(label="Total Number of Customers", value=total_customers)
 
 # Filter options
 st.sidebar.subheader('Sales Revenue Over Time')
@@ -40,7 +34,6 @@ st.sidebar.subheader('Sales by Country')
 num_countries = st.sidebar.slider('Select number of top countries to display', 5, 20, 10)
 
 # Main layout
-st.title("E-Commerce Store Dashboard")
 
 # Row A - Metrics
 st.markdown('### Key Metrics')
